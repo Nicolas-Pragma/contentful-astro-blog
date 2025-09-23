@@ -1,0 +1,31 @@
+---
+import Card from "../components/Card/Card.astro";
+import Layout from "../layouts/Layout.astro";
+import { entries } from "../lib/fetchContentful";
+
+const tecnologias = entries.items.map((entry) => {
+  return {
+    titulo: entry.fields.titulo,
+    imagen: entry.fields.imagen,
+  };
+});
+---
+
+<Layout>
+  <div>
+    {
+      tecnologias.map((tecnologia) => (
+        <Card titulo={tecnologia.titulo} imagen={tecnologia.imagen} />
+      ))
+    }
+  </div>
+</Layout>
+
+<style>
+  div {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+</style>
